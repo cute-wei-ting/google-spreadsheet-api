@@ -13,6 +13,11 @@ app = Flask(__name__)
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SERVICE_ACCOUNT_FILE='credential.json'
 
+
+@app.route("/googleDoc/health")
+def health():
+    return 'success'
+
 @app.route("/googleDoc/spreadsheet/private")
 def download_spreadsheet_private():
     key=request.args.get('key')
@@ -89,4 +94,7 @@ def build_title(cells):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(
+        host='0.0.0.0',
+        port=5000,
+    )  
