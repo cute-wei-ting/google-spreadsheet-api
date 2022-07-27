@@ -1,24 +1,27 @@
-from flask import Flask,request
+from flask import Blueprint,Flask,request
+
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google.oauth2 import service_account
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+
 import os.path
 import json
 
-app = Flask(__name__)
+bp = Blueprint('burritos', __name__,template_folder='templates')
+PREFIX='/google-spreadsheet-api'
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 SERVICE_ACCOUNT_FILE='credential.json'
 
 
-@app.route("/googleDoc/health")
+@bp.route("/googleDoc/health")
 def health():
     return 'success'
 
-@app.route("/googleDoc/spreadsheet/private")
+@bp.route("/googleDoc/spreadsheet/private")
 def download_spreadsheet_private():
     key=request.args.get('key')
     gid=request.args.get('gid')
@@ -91,7 +94,8 @@ def build_title(cells):
                 title_row.append(title_row[-1])
     return title_row
 
-
+app = Flask(__name__)
+app.register_blueprint(bp, url_prefix=PREFIX)
 
 if __name__ == '__main__':
     app.run(
