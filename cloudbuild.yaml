@@ -9,7 +9,7 @@ steps:
 - name: gcr.io/cloud-builders/docker
   args: ['push','gcr.io/$PROJECT_ID/google-spreadsheet-api:latest-SNAPSHOT']
 - name: gcr.io/cloud-builders/kubectl
-  args: ['-n','$_K8S_NS','set','image','deployment','google-spreadsheet-api','gcr.io/$PROJECT_ID/google-spreadsheet-api:${SHORT_SHA}']
+  args: ['set','image','deployment','google-spreadsheet-api','google-spreadsheet-api=gcr.io/$PROJECT_ID/google-spreadsheet-api:${SHORT_SHA}']
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=asia-east1-a'
   - 'CLOUDSDK_CONTAINER_CLUSTER=web-test'
