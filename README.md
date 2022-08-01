@@ -1,10 +1,11 @@
 # google-spreadsheet-api
-spreadsheet to json with google service account auth
+spreadsheet to rows or json with google service account auth
 
 Usage
 --
 - 私人表單才需要
     - share with `google-service@skye-personal.iam.gserviceaccount.com`
+    
     ![share with service account](img/share.png)
 - api
     - convert to rows
