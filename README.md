@@ -25,7 +25,7 @@ Service Account
 --
  - create secret for service account credentisl on GKE
 
-    `kubectl create secret generic google-service-credential --from-file=key.json=credentials.json`
+    `kubectl create secret generic google-service-credential --from-file=key.json=credential.json`
 
 CICD
 --
